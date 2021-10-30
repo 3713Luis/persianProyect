@@ -1,10 +1,17 @@
 DROP DATABASE IF EXISTS  percian_shop;
 CREATE DATABASE percian_shop;
-USE percian_shop
+USE percian_shop;
 
-CREATE TABLE USUARIO (
+CREATE TABLE CLIENTE (
     id_usuario INT AUTO_INCREMENT,
     nombre VARCHAR(20) NOT NULL,
+    contraseña VARCHAR(20) NOT NULL,
+    PRIMARY KEY(id_usuario)
+)ENGINE=INNODB;
+
+CREATE TABLE CUENTA (
+    id_usuario INT AUTO_INCREMENT,
+    usuario VARCHAR(20) NOT NULL,
     contraseña VARCHAR(20) NOT NULL,
     PRIMARY KEY(id_usuario)
 )ENGINE=INNODB;

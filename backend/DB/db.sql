@@ -36,9 +36,9 @@ DESC SESION;
 
 CREATE TABLE BANNER (
     id_banner INT AUTO_INCREMENT,
-    estatus ENUM('ABIERTA','CERRADA'),
+    estatus ENUM('Activo','Inactivo'),
     nombre_imagen VARCHAR(100) NOT NULL,
-    base BLOB  NOT NULL,
+    banner LONGBLOB NOT NULL,
     PRIMARY KEY (id_banner)
 )ENGINE=INNODB;
 DESC BANNER;

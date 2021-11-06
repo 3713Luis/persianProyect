@@ -22,6 +22,8 @@ function runModule() {
         console.log('Convirtiendo mi blob');
         const myBlob = fileInput.files[0];
         const myB64 = await blobToBase64(myBlob);
+       
+   
         console.log(myB64);
     });
     

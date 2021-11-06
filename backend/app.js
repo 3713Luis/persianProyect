@@ -8,7 +8,8 @@ const PORT =  process.env.PORT || 3050;
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
- app.use(require('./apis/user'));
+app.use(require('./apis/banner'))
+//  app.use(require('./apis/user'));
 // app.use(require('./apis/sesion'));
 // app.use(require('./apis/deuda'));
 // app.use(require('./apis/pago'));

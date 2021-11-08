@@ -58,9 +58,17 @@ CREATE TABLE ARTICULO (
     precio DECIMAL(6,2) NOT NULL,
     marca VARCHAR(20) NOT NULL,
     color VARCHAR(20) NOT NULL,
+    tono VARCHAR(20),
+    material VARCHAR(20),
+    referencia VARCHAR(20),
     fecha DATE NOT NULL,
-    tamaño  VARCHAR(20) NOT NULL,
+    ancho VARCHAR(20),
+    largo VARCHAR(20),
+    tamaño_generico VARCHAR(20),
+    talla ENUM("C","M","G"),
     descripción TEXT NOT NULL,
+    mas_pedido INT DEFAULT 0,
+    stock INT DEFAULT 0,
     PRIMARY KEY (id_articulo),
     FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id_categoria)
 )ENGINE=INNODB;

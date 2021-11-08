@@ -2,22 +2,27 @@ const { Router } = require('express');
 const articulo = Router();
 const utils = require('./utils/transacciones');
 
-artiuclo.post('/api/add/img', (request, response) => {
-    const sql = `INSERT INTO ARTICULO SET ?`
+articulo.post('/api/add/articulo', (request, response) => {
+    const sql = `INSERT INTO ARTICULO SET ?, fecha_registro=CURRENT_TIMESTAMP`
     const object = {
-        estatus: request.body.estatus,
-        nombre_img: request.body.nombre_img,
-        base64_img: request.body.base64_img
+        id_articulo: request.body.id_articulo,
+        id_categoria: request.body.id_categoria,
+        nombre_articulo: request.body.nombre_articulo,
+        precio: request.body.precio,
+        marca: request.body.marca,
+        color: request.body.color,
+        tono: request.body.tono,
+        material: request.body.material,
+        referencia: request.body.referencia,
+        ancho: request.body.ancho,
+        largo: request.body.largo,
+        tamaño_generico: request.body.tamaño_generico,
+        talla: request.body.talla,
+        descripcion: request.body.descripcion,
+        mas_pedido: request.body.mas_pedido,
+        stock: request.body.stock,
     }
     utils.insert(sql, object, response, "Registro exitoso");
 });
 
-pago.post('/api/insert/pago', (request, response) => {
-    const sql = `INSERT INTO pago SET ?, fecha=(SELECT CURDATE())`
-    const object = {
-        saldo_total: request.body.saldo_total,
-        abono: request.body.abono,
-        id_acreedor: request.body.id_acreedor,
-    }
-   utils.insert(sql,object,response,"Respuesta Exitosa");
-});
+module.exports = articulo;

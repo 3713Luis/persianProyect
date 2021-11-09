@@ -21,8 +21,14 @@ articulo.post('/api/add/articulo', (request, response) => {
         descripcion: request.body.descripcion,
         mas_pedido: request.body.mas_pedido,
         stock: request.body.stock,
+        estatus: request.body.estatus
     }
     utils.insert(sql, object, response, "Registro exitoso");
+});
+
+articulo.get('/api/consultar/articulos', (request, response) => {
+    const sql = `SELECT * FROM ARTICULO`;
+    utils.query(sql,response);
 });
 
 module.exports = articulo;

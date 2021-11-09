@@ -69,6 +69,7 @@ CREATE TABLE ARTICULO (
     mas_pedido INT DEFAULT 0,
     stock INT DEFAULT 0,
     fecha_registro DATE NOT NULL,
+    estatus ENUM('Activo','Inactivo'),
     PRIMARY KEY (id_articulo),
     FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id_categoria)
 )ENGINE=INNODB;

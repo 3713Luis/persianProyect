@@ -1,6 +1,7 @@
 const connection = require('../../DB/database');
 
 
+
 const insert = (sql, object, response, mensaje) => {
     connection.query(sql, object, error => {
         if (error) throw error;
@@ -19,4 +20,11 @@ const query = (sql,response) => {
     });
 }
 
-module.exports = {insert,query};
+const insertArt = (sql, object, response, mensaje) => {
+    connection.query(sql, object, error => {
+        if (error) throw error;
+        response.send(mensaje);
+    });
+}
+
+module.exports = {insert,query,insertArt};

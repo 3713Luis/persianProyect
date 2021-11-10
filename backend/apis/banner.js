@@ -10,6 +10,7 @@ banner.post('/api/add/img', (request, response) => {
         base64_img: request.body.base64_img
     }
     utils.insert(sql, object, response, "Registro exitoso");
+    console.log(response);
 });
 
 banner.get('/api/images', (request, response) => {

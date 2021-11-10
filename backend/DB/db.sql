@@ -16,7 +16,7 @@ DESC CLIENTE;
 
 CREATE TABLE CUENTA (
     id_cuenta INT AUTO_INCREMENT,
-    id_cliente INT,
+    id_cliente INT NOT NULL,
     nombre_usuario VARCHAR(20) NOT NULL,
     contraseña VARCHAR(20) NOT NULL,
     tipo_cliente ENUM('CLIENTE', 'ADMINISTRADOR') DEFAULT 'CLIENTE',
@@ -27,7 +27,7 @@ DESC CUENTA;
 
 CREATE TABLE SESION (
     id_sesion INT AUTO_INCREMENT,
-    id_cuenta INT,
+    id_cuenta INT NOT NULL,
     estatus ENUM('ABIERTA','CERRADA') DEFAULT 'CERRADA',
     PRIMARY KEY (id_sesion),
     FOREIGN KEY (id_cuenta) REFERENCES CUENTA(id_cuenta)
@@ -53,7 +53,7 @@ DESC CATEGORIA;
 
 CREATE TABLE ARTICULO (
     id_articulo INT AUTO_INCREMENT,
-    id_categoria INT,
+    id_categoria INT NOT NULL,
     nombre_articulo VARCHAR(50) NOT NULL,
     precio DECIMAL(6,2) NOT NULL,
     marca VARCHAR(20) NOT NULL,
@@ -75,6 +75,19 @@ CREATE TABLE ARTICULO (
 )ENGINE=INNODB;
 DESC ARTICULO;
 
+CREATE TABLE IMAGENES (
+    id_img INT AUTO_INCREMENT,
+    id_articulo INT NOT NULL,
+    first_img MEDIUMBLOB NOT NULL,
+    second_img MEDIUMBLOB,
+    third_img MEDIUMBLOB,
+    fourth_img MEDIUMBLOB,
+    fifth_img MEDIUMBLOB,
+    PRIMARY KEY (id_img),
+    FOREIGN KEY (id_articulo) REFERENCES ARTICULO(id_articulo)
+)ENGINE=INNODB;
+DESC IMAGENES;
+
 CREATE TABLE ESTATUS_ARTICULO (
     id_estatus_articulo INT AUTO_INCREMENT,
     id_articulo INT,
@@ -88,3 +101,56 @@ DESC ESTATUS_ARTICULO;
 
 INSERT INTO Usuario VALUES (1,'Luis','123');
 INSERT INTO BANNER VALUES(1,'Inactivo','Imagen Secundaria','')
+
+DELIMITER $$
+CREATE PROCEDURE test_procedure_articulo2 (
+    in idArticulo VARCHAR(20),
+    in idCategoria int,
+    in nombreArticulo VARCHAR(50),
+    in pPrecio decimal,
+    in pMarca VARCHAR(20),
+    in pColor VARCHAR(20),
+    in pTono VARCHAR(20),
+    in pMaterial VARCHAR(20),
+    in pReferencia VARCHAR(20),
+    in pAncho VARCHAR(20),
+    in pLargo VARCHAR(20),
+    in tamañoGenerico VARCHAR(20),
+    in pTalla VARCHAR(20),
+    in pPescripcion VARCHAR(50),
+    in masPedido int,
+    in pStock int,
+    in pEstatus VARCHAR(20)
+)
+BEGIN
+  INSERT INTO ARTICULO VALUES (
+      default,
+      idCategoria,
+      nombreArticulo,
+      pPrecio,
+      pMarca,
+      pColor,
+      pTono,
+      pMaterial,
+      pReferencia,
+      pAncho,
+      pLargo,
+      tamañoGenerico,
+      pTalla,
+      pPescripcion,
+      masPedido,
+      pStock,
+      CURRENT_TIMESTAMP,
+      pEstatus
+      );
+      select * from ARTICULO;
+END $$
+
+
+CREATE TRIGGER insert_image BEFORE INSERT ON ARTICULO
+  FOR EACH ROW BEGIN
+    INSERT INTO IMAGENES SET ?, id_articulo = (SELECT id_articulo FROM ARTICULO ORDER BY id_articulo DESC LIMIT 1);
+  END
+|
+
+DELIMITER ;

@@ -11,7 +11,6 @@ CREATE TABLE CLIENTE (
     telefono INT(12) NOT NULL,
     PRIMARY KEY(id_cliente)
 )ENGINE=INNODB;
-
 DESC CLIENTE;
 
 CREATE TABLE CUENTA (
@@ -99,7 +98,7 @@ CREATE TABLE ESTATUS_ARTICULO (
 DESC ESTATUS_ARTICULO;
 
 DELIMITER $$
-CREATE PROCEDURE test_procedure_articulo2 (
+CREATE PROCEDURE test_procedure_articulo (
     in idArticulo VARCHAR(20),
     in idCategoria int,
     in nombreArticulo VARCHAR(50),
@@ -116,7 +115,13 @@ CREATE PROCEDURE test_procedure_articulo2 (
     in pPescripcion VARCHAR(50),
     in masPedido int,
     in pStock int,
-    in pEstatus VARCHAR(20)
+    in pEstatus VARCHAR(20),
+    in idImg VARCHAR(100),
+    in firstImg VARCHAR(100),
+    in secondImg VARCHAR(100),
+    in thirdImg VARCHAR(100),
+    in fourthImg VARCHAR(100),
+    in fifthImg VARCHAR(100)
 )
 BEGIN
   INSERT INTO ARTICULO VALUES (
@@ -139,14 +144,13 @@ BEGIN
       CURRENT_TIMESTAMP,
       pEstatus
       );
-      select * from ARTICULO;
+      INSERT INTO imagenes VALUES (
+      default,
+      (select id_articulo from articulo ORDER BY id_articulo DESC limit 1),
+      firstImg,
+      secondImg,
+      thirdImg,
+      fourthImg,
+      fifthImg
+      );
 END $$
-
-
-CREATE TRIGGER insert_image BEFORE INSERT ON ARTICULO
-  FOR EACH ROW BEGIN
-    INSERT INTO IMAGENES SET ?, id_articulo = (SELECT id_articulo FROM ARTICULO ORDER BY id_articulo DESC LIMIT 1);
-  END
-|
-
-DELIMITER ;

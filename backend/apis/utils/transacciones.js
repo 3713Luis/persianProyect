@@ -20,11 +20,4 @@ const query = (sql,response) => {
     });
 }
 
-const insertArt = (sql, object, response, mensaje) => {
-    connection.query(sql, object, error => {
-        if (error) throw error;
-        response.send(mensaje);
-    });
-}
-
-module.exports = {insert,query,insertArt};
+module.exports = {insert,query};

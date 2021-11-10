@@ -98,10 +98,6 @@ CREATE TABLE ESTATUS_ARTICULO (
 )ENGINE=INNODB;
 DESC ESTATUS_ARTICULO;
 
-
-INSERT INTO Usuario VALUES (1,'Luis','123');
-INSERT INTO BANNER VALUES(1,'Inactivo','Imagen Secundaria','')
-
 DELIMITER $$
 CREATE PROCEDURE test_procedure_articulo2 (
     in idArticulo VARCHAR(20),

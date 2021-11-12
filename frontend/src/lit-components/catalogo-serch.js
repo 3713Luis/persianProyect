@@ -1,6 +1,8 @@
-import { LitElement, html} from 'lit-element';
+import { LitElement, html} from 'lit';
 
 export class CatalogoSerch extends LitElement {
+
+
 
     render() {
         return html`

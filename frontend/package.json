@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit-element": "^3.0.1"
+    "lit": "^2.0.2"
   }
 }

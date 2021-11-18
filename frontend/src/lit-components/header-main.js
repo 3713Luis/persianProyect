@@ -6,6 +6,13 @@ export class HeaderMain extends LitElement {
          :host {
                 display: block;
             }
+        .header-navigation {
+              display: block;
+            }
+        .nav-item {
+          display: inline;
+          margin-left: 20px;
+        }
         `;
     }
 
@@ -30,8 +37,7 @@ export class HeaderMain extends LitElement {
     }
     render() {
         return html`
-            <div class="card text-center">
-        <div class="card-header">
+        <div class="header-navigation">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
               <a class="nav-link active" href="#">Categorias</a>
@@ -43,7 +49,6 @@ export class HeaderMain extends LitElement {
               <a class="nav-link disabled" href="#">perfil</a>
             </li>
           </ul>
-        </div>
       </div>
         `;
     }

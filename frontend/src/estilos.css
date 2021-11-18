@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+head title {
+    display: none;
+}
+
+.header {
+    border: 0.1px solid;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.banner {
+    background: green;
+    height: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.catalogo {
+    background: yellow;
+    height: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.footer {
+    height: auto;
+    background: blue;
+}

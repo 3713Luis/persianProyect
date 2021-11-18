@@ -1,12 +1,26 @@
-import { LitElement, html} from 'lit';
+import { LitElement, html, css} from 'lit';
 
 export class CatalogoSerch extends LitElement {
 
-
+static get styles() {
+    return css`
+        :host {
+            
+        }
+        .contenedor {
+            background: orange;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+    `
+}
 
     render() {
         return html`
-        Chompis me la pelas
+        <div class="contenedor">
+            Chompis me la pelas
+        </div>
+       
         `;
     }
 }

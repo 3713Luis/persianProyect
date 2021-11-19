@@ -11,6 +11,9 @@ static get styles() {
             margin-left: 5%;
             margin-right: 5%;
         }
+        .titulo: {
+            color: red;
+        }
     `
 }
 /**
@@ -18,7 +21,10 @@ static get styles() {
   */
  static get properties() {
     return {
-        titulo: {type: Object}
+        titulo: {type: Object},
+        additional: {
+            type: String
+        },
     };
 }
 
@@ -29,18 +35,24 @@ static get styles() {
   */
 constructor() {
     super();
-
     this.titulo = {
         titulo: {
             texto: "Chompiras me la pelas",
-            class: "lol",
+            class: 'lol',
             hCustom: "1",
+            style: [
+                "color: blue;",
+                "background: red;",
+                "font-size: 30px;"
+            ]
+
         },
         size: {
             size: ''
         }
     };
-    console.log(this.title);
+   
+
 }
 
 

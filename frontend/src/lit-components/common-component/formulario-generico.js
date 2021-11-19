@@ -4,9 +4,12 @@ export class FormularioGenerico extends LitElement {
 
     static get properties() {
         return {
-            objElements: { 
+            objElements: {
                 type: Object
             },
+            additional: {
+                type: String
+            }
         };
     }
 
@@ -14,13 +17,13 @@ export class FormularioGenerico extends LitElement {
         super();
         console.log('entró');
         this.objElements = {};
+        this.additional = '';
     }
 
     static get styles() {
         return css`
         .lol {
             color: green;
-            
         }
         :host {
             
@@ -31,40 +34,52 @@ export class FormularioGenerico extends LitElement {
 
     render() {
         return html`
-        ${this.objElements.titulo ? this.buildTitle(): html`<p>no hay valores</p>`}
+        ${this.objElements.titulo ? this.buildTitle() : html`<p>no hay valores de titulo</p>`}
+        ${this.objElements.input ? this.buildInput() : html`<p>no hay valores de input</p>`}
         `;
     }
 
     buildTitle() {
-        console.log("entro switch");
-            switch (this.objElements.titulo.hCustom) { 
-                case "1":
-                    return html `
-                    <h1 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
+        switch (this.objElements.titulo.hCustom) {
+            case "1":
+                return html`
+                    <h1 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
                     `;
-                case "2":
-                    return html `
-                    <h2 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h2>
+            case "2":
+                return html`
+                    <h2 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h2>
                     `;
-                case "3":
-                    return html `
-                    <h3 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h3>
+            case "3":
+                return html`
+                    <h3 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h3>
                     `;
-                case "4":
-                    return html `
-                    <h4 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h4>
+            case "4":
+                return html`
+                    <h4 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h4>
                     `;
-                case "5":
-                    return html `
-                    <h5 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h5>
+            case "5":
+                return html`
+                    <h5 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h5>
                     `;
-                case "6":
-                    return html `
-                    <h6 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
+            case "6":
+                return html`
+                    <h6 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
                     `;
-                default:
-                    break;
-            }
+            default:
+                break;
+        }
+    }
+
+    getAdditionalStyles() {
+        this.additional = this.objElements.titulo.style.map(element => {
+
+            return element + element;
+        });
+        return this.additional;
+    }
+
+    buildInput() {
+        console.log("Input");
     }
 }
 customElements.define('formulario-generico', FormularioGenerico);

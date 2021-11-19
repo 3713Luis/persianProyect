@@ -1,5 +1,4 @@
 import { LitElement, html, css} from 'lit';
-
 export class CatalogoSerch extends LitElement {
 
 static get styles() {
@@ -17,6 +16,10 @@ static get styles() {
 
     render() {
         return html`
+
+        <formulario-generico>
+
+        </formulario-generico>
         <div class="contenedor">
             Chompis me la pelas
         </div>

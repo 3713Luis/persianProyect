@@ -20,6 +20,12 @@ export class BannerMain extends LitElement {
             arrayData: {
                 type: Array
             },
+            objectData: {
+                type: Object
+            },
+            urlImage: {
+                type: String
+            }
         };
     }
 
@@ -31,6 +37,7 @@ export class BannerMain extends LitElement {
     constructor() {
         super();
         this.arrayData = [];
+        this.urlImage = "x"
         this.getData();
     }
 
@@ -58,25 +65,39 @@ export class BannerMain extends LitElement {
                     <span class="visually-hidden">Next</span>
                 </button>
                 </div> -->
+    <div class="carousel">
+        ${JSON.stringify(this.arrayData[0])}
+    </div>
     <button @click="${this.changeImage}" class="carousel-control-prev" type="button"
         data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <div class="carousel">
-        ${JSON.stringify(this.arrayData[0])}
-    </div>
+    <button @click="${this.convertImage}" class="carousel-control-prev" type="button">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Convirtiendo</span>
+    </button>
+    <img class="img" src="${this.urlImage}">
+        <p>${this.urlImage}</p>
         `;
     }
 
     async getData() {
         const data = await getImagesPromise();
         this.arrayData = data.data;
-        console.log(data.data[0].base64_img);
+        this.objectData = data.data[0].base64_img;
     }
 
     changeImage() {
         console.log("cambiando imagen");
+    }
+
+    convertImage() {
+        let blob = new Blob([this.objectData.data]);
+        let url = URL.createObjectURL(blob);
+        console.log(url);
+        this.urlImage = url;
+
     }
 }
 customElements.define('banner-main', BannerMain);

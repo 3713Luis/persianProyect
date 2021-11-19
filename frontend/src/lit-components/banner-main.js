@@ -38,7 +38,6 @@ export class BannerMain extends LitElement {
         super();
         this.arrayData = [];
         this.urlImage = "x"
-        this.getData();
     }
 
     render() {
@@ -82,12 +81,6 @@ export class BannerMain extends LitElement {
         `;
     }
 
-    async getData() {
-        const data = await getImagesPromise();
-        this.arrayData = data.data;
-        this.objectData = data.data[0].base64_img;
-    }
-
     changeImage() {
         console.log("cambiando imagen");
     }
@@ -97,7 +90,6 @@ export class BannerMain extends LitElement {
         let url = URL.createObjectURL(blob);
         console.log(url);
         this.urlImage = url;
-
     }
 }
 customElements.define('banner-main', BannerMain);

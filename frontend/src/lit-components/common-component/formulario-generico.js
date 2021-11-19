@@ -4,20 +4,16 @@ export class FormularioGenerico extends LitElement {
 
     static get properties() {
         return {
-            objElements: { type: Object },
+            objElements: { 
+                type: Object
+            },
         };
     }
 
     constructor() {
         super();
         console.log('entró');
-        this.objElements = {
-            titulo: {
-                texto: "Chompiras me la pelas",
-                class: "lol",
-                hCustom: "1",
-            }
-        };
+        this.objElements = {};
     }
 
     static get styles() {
@@ -41,14 +37,31 @@ export class FormularioGenerico extends LitElement {
 
     buildTitle() {
         console.log("entro switch");
-            switch (this.objElements.titulo.hCustom) {
-                
+            switch (this.objElements.titulo.hCustom) { 
                 case "1":
                     return html `
                     <h1 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
                     `;
-                    break;
-            
+                case "2":
+                    return html `
+                    <h2 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h2>
+                    `;
+                case "3":
+                    return html `
+                    <h3 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h3>
+                    `;
+                case "4":
+                    return html `
+                    <h4 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h4>
+                    `;
+                case "5":
+                    return html `
+                    <h5 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h5>
+                    `;
+                case "6":
+                    return html `
+                    <h6 class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
+                    `;
                 default:
                     break;
             }

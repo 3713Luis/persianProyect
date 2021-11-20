@@ -47,23 +47,23 @@ export class FormularioGenerico extends LitElement {
                     `;
             case "2":
                 return html`
-                    <h2 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h2>
+                    <h2 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h2>
                     `;
             case "3":
                 return html`
-                    <h3 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h3>
+                    <h3 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h3>
                     `;
             case "4":
                 return html`
-                    <h4 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h4>
+                    <h4 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h4>
                     `;
             case "5":
                 return html`
-                    <h5 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h5>
+                    <h5 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h5>
                     `;
             case "6":
                 return html`
-                    <h6 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
+                    <h6 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
                     `;
             default:
                 break;

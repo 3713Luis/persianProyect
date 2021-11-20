@@ -41,7 +41,7 @@ constructor() {
             class: 'lol',
             hCustom: "1",
             style: [
-                "color: blue;",
+                "color: black;",
                 "background: red;",
                 "font-size: 30px;"
             ]

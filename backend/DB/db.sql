@@ -154,3 +154,6 @@ BEGIN
       fifthImg
       );
 END $$
+
+DELIMITER ;
+

@@ -43,7 +43,7 @@ export class FormularioGenerico extends LitElement {
         switch (this.objElements.titulo.hCustom) {
             case "1":
                 return html`
-                    <h1 style="${this.getAdditionalStyles()}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
+                    <h1 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
                     `;
             case "2":
                 return html`
@@ -70,10 +70,9 @@ export class FormularioGenerico extends LitElement {
         }
     }
 
-    getAdditionalStyles() {
-        this.additional = this.objElements.titulo.style.map(element => {
-
-            return element + element;
+    getAdditionalStyles(elemento) {
+        this.additional = elemento.map(element => {
+            return this.additional = this.additional + element;
         });
         return this.additional;
     }

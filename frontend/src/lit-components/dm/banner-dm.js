@@ -27,15 +27,14 @@ export class BannerDm extends LitElement {
     constructor() {
         super();
         this.arrayData = [];
+        this.objectData = {};
         this.urlImage = "x"
-        console.log("dm");
         this.getData();
-        console.log(this.arrayData);
     }
 
     render() {
         return html`
-        <banner-main .arrayData="${this.arrayData}"></banner-main>
+        <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
         `;
     }
 
@@ -43,8 +42,6 @@ export class BannerDm extends LitElement {
         const data = await getImagesPromise();
         this.arrayData = data.data;
         this.objectData = data.data[0].base64_img;
-        console.log(this.arrayData);
-
     }
 }
 customElements.define('banner-dm', BannerDm);

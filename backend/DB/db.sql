@@ -37,6 +37,7 @@ CREATE TABLE BANNER (
     id_banner INT AUTO_INCREMENT,
     estatus ENUM('Activo','Inactivo'),
     nombre_img VARCHAR(100) NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
     base64_img LONGBLOB NOT NULL,
     PRIMARY KEY (id_banner)
 )ENGINE=INNODB;

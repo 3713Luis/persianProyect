@@ -25,6 +25,9 @@ export class BannerMain extends LitElement {
             },
             urlImage: {
                 type: String
+            },
+            commonUrl: {
+                type: String
             }
         };
     }
@@ -37,7 +40,7 @@ export class BannerMain extends LitElement {
     constructor() {
         super();
         this.arrayData = [];
-        this.urlImage = "x"
+        this.commonUrl = 'http://localhost:3050/'
     }
 
     render() {
@@ -65,7 +68,6 @@ export class BannerMain extends LitElement {
                 </button>
                 </div> -->
     <div class="carousel">
-        ${JSON.stringify(this.arrayData[0])}
     </div>
     <button @click="${this.changeImage}" class="carousel-control-prev" type="button"
         data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -76,20 +78,18 @@ export class BannerMain extends LitElement {
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Convirtiendo</span>
     </button>
-    <img class="img" src="${this.urlImage}">
-        <p>${this.urlImage}</p>
-        `;
-    }
+    ${this.objectData.view === true ? this.arrayData.map(element => {
+    return html`
+    <img class="img" src="${this.getUrlImage(element)}">`
+    }) : html `<p>No hay nada que mostrar por el momento</p>`}
+    `;}
 
     changeImage() {
         console.log("cambiando imagen");
     }
 
-    convertImage() {
-        let blob = new Blob([this.objectData.data]);
-        let url = URL.createObjectURL(blob);
-        console.log(url);
-        this.urlImage = url;
+    getUrlImage(element) {
+        return this.commonUrl + element.urlName;
     }
 }
 customElements.define('banner-main', BannerMain);

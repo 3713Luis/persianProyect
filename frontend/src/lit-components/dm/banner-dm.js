@@ -35,13 +35,19 @@ export class BannerDm extends LitElement {
     render() {
         return html`
         <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
+        <form-banner></form-banner>
         `;
     }
 
     async getData() {
         const data = await getImagesPromise();
-        this.arrayData = data.data;
-        this.objectData = data.data[0].base64_img;
+        if (data) {
+            this.objectData = {view: true};
+            this.arrayData = data.data;
+        } else {
+            this.objectData = {view:data};
+        }
+      
     }
 }
 customElements.define('banner-dm', BannerDm);

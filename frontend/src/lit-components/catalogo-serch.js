@@ -39,7 +39,7 @@ constructor() {
         titulo: {
             texto: "Chompiras me la pelas",
             class: 'lol',
-            hCustom: "1",
+            hCustom: "",
             style: [
                 "color: black;",
                 "background: red;",

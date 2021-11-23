@@ -29,12 +29,37 @@ export class FormularioGenerico extends LitElement {
             
             display: block;
         }
+        .image {
+            width: 40%;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+        .container-img {
+            background: #ccc;
+            width: 100%;
+        }
+        .container-image {
+            width: 100%;
+            height: auto;
+        }
+        .input-select {
+            background: #8BFEEA;
+            display: block;
+            margin:auto;
+        }
+        #file-upload-button {
+            background: red;
+            display: block;
+            margin:auto;
+        }
         `
     }
 
     render() {
         return html`
         ${this.objElements.titulo ? this.buildTitle() : html`<p>no hay valores de titulo</p>`}
+        ${this.buidPreViewImage()}
         ${this.objElements.input ? this.buildInput() : html`<p>no hay valores de input</p>`}
         `;
     }
@@ -66,7 +91,27 @@ export class FormularioGenerico extends LitElement {
                     <h6 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h6>
                     `;
             default:
-                break;
+                return html`<p style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</p>`
+        }
+    }
+
+    buidPreViewImage() {
+        return html`
+            <di class="container-image">
+            <div class="container-img"><img class="image" id="image" src=""/></div>
+            <input class="input-select" @change='${(e) => {this.loadImage(e)}}' type="file" name="image" accept="image/jpeg,image/jpg,image/png">
+            </di>
+        `;
+    }
+
+    loadImage(event) {
+        let read_img = new FileReader();
+        read_img.readAsDataURL(event.target.files[0]);
+        let image = this.shadowRoot.querySelector('#image');
+        read_img.onload = () => {
+            if (read_img.readyState == 2) {
+                image.src = read_img.result;
+            }
         }
     }
 

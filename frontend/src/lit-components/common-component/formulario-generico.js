@@ -22,12 +22,17 @@ export class FormularioGenerico extends LitElement {
 
     static get styles() {
         return css`
-        .lol {
-            color: green;
-        }
         :host {
             
             display: block;
+        }
+        .container-image {
+            width: 100%;
+            height: auto;
+        }
+        .container-img {
+            background: #ccc;
+            width: 100%;
         }
         .image {
             width: 40%;
@@ -35,31 +40,25 @@ export class FormularioGenerico extends LitElement {
             display: block;
             margin: auto;
         }
-        .container-img {
-            background: #ccc;
-            width: 100%;
-        }
-        .container-image {
-            width: 100%;
-            height: auto;
-        }
         .input-select {
             background: #8BFEEA;
             display: block;
             margin:auto;
         }
-        #file-upload-button {
+        .container-area {
             background: red;
-            display: block;
-            margin:auto;
+        }
+        .text-area {
+            background: blue;
         }
         `
     }
 
     render() {
         return html`
-        ${this.objElements.titulo ? this.buildTitle() : html`<p>no hay valores de titulo</p>`}
-        ${this.buidPreViewImage()}
+        ${this.objElements.titulo ? this.buildTitle() : ''}
+        ${this.objElements.ImagePreview ? this.buidPreViewImage(): ''}
+        ${this.objElements.textArea ? this.buildLoremArea() : ''}
         ${this.objElements.input ? this.buildInput() : html`<p>no hay valores de input</p>`}
         `;
     }
@@ -97,10 +96,12 @@ export class FormularioGenerico extends LitElement {
 
     buidPreViewImage() {
         return html`
-            <di class="container-image">
-            <div class="container-img"><img class="image" id="image" src=""/></div>
-            <input class="input-select" @change='${(e) => {this.loadImage(e)}}' type="file" name="image" accept="image/jpeg,image/jpg,image/png">
-            </di>
+            <div style="${this.getAdditionalStyles(this.objElements.ImagePreview.style.container.containerImage)}" class="${this.objElements.ImagePreview.style.container.class}">
+                <div style="${this.getAdditionalStyles(this.objElements.ImagePreview.style.contenImage.containerImg)}" class="${this.objElements.ImagePreview.style.contenImage.class}">
+                    <img style="${this.getAdditionalStyles(this.objElements.ImagePreview.style.image.imageStyle)}" class="${this.objElements.ImagePreview.style.image.class}" id="image"/>
+                </div>
+                <input style="${this.getAdditionalStyles(this.objElements.ImagePreview.style.inputSelect.inputStyle)}" class="${this.objElements.ImagePreview.style.inputSelect.class}" @change='${this.loadImage}' type="file" name="image">
+            </div>
         `;
     }
 
@@ -116,10 +117,25 @@ export class FormularioGenerico extends LitElement {
     }
 
     getAdditionalStyles(elemento) {
+        this.additional = '';
         this.additional = elemento.map(element => {
             return this.additional = this.additional + element;
         });
         return this.additional;
+    }
+
+    buildLoremArea() {
+        return html`
+            <div style="${this.getAdditionalStyles(this.objElements.textArea.styleContainer.container.containerTextArea)}" class="${this.objElements.textArea.styleContainer.container.class}">
+                ${this.objElements.textArea.textArray.map(element => {
+                   return this.getArrayText(element)
+                })}
+            </div>
+        `
+    }
+
+    getArrayText(element) {
+        return html `<p style="${this.getAdditionalStyles(element.styleText.text)}" class="${element.styleText.class}">${element.text}</p>`
     }
 
     buildInput() {

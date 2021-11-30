@@ -32,6 +32,7 @@ export class BannerDm extends LitElement {
         this.getData();
     }
 
+
     render() {
         return html`
         <!-- <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main> -->

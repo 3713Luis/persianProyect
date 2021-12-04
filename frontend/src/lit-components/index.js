@@ -6,3 +6,4 @@ import './dm/banner-dm';
 import './form-banner'
 import './pruebas/visual-test'
 import './pruebas/controlador-test'
+import './dm/catalogo-dm'

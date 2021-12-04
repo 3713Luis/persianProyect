@@ -9,15 +9,30 @@ export class FormularioGenerico extends LitElement {
             },
             additional: {
                 type: String
+            },
+            inputCount: {
+                type: Number
+            },
+            method: {
+                type: String
+            },
+            action: {
+                type: String
+            },
+            inputVales: {
+                type: Array
             }
         };
     }
 
     constructor() {
         super();
-        console.log('entró');
         this.objElements = {};
         this.additional = '';
+        this.inputCount = 0;
+        this.method = 'GET';
+        this.action = '';
+        this.inputVales = [];
     }
 
     static get styles() {
@@ -56,10 +71,11 @@ export class FormularioGenerico extends LitElement {
 
     render() {
         return html`
-        ${this.objElements.titulo ? this.buildTitle() : ''}
-        ${this.objElements.ImagePreview ? this.buidPreViewImage(): ''}
-        ${this.objElements.textArea ? this.buildLoremArea() : ''}
-        ${this.objElements.input ? this.buildInput() : html`<p>no hay valores de input</p>`}
+            ${this.objElements.titulo ? this.buildTitle() : ''}
+            ${this.objElements.ImagePreview ? this.buidPreViewImage(): ''}
+            ${this.objElements.textArea ? this.buildLoremArea() : ''}
+            ${this.objElements.formElement ? this.buildInput() : html`<p>no hay valores de input</p>`}
+            ${this.buildButon()}       
         `;
     }
 
@@ -139,7 +155,49 @@ export class FormularioGenerico extends LitElement {
     }
 
     buildInput() {
-        console.log("Input");
+        return html `
+        <div style="${this.getAdditionalStyles(this.objElements.formElement.container)}" class="${this.objElements.formElement.classContaine}">
+            <div style="${this.getAdditionalStyles(this.objElements.formElement.subcontainer)}" class="${this.objElements.formElement.classSubcontainer}">
+              ${this.getStylesToArray()}
+            </div>
+        </div>
+           
+        `
     }
+
+    getStylesToArray() {
+        let templateArray = []
+        this.objElements.formElement.item.map((element, index) => {
+            this.inputCount = index;
+            templateArray.push(
+                html `
+                    <label style="${this.getAdditionalStyles(element.label.style)}" class="${element.label.class}" for="${'input-' + index}">${element.label.value}</label>
+                    <input style="${this.getAdditionalStyles(element.input.style)}" class="${element.input.class}" type="text" id="${element.input.inputId}" name="${'input-' + index}">
+                `)
+            this.inputVales.push({name: element.input.name, id:element.input.inputId});
+          })
+          return templateArray;
+        
+    }
+
+    buildButon() {
+        return html `
+            <button type="button" @click="${this.getElements}">Enviar Formulario</button>
+        `
+    }
+
+    getElements() {
+        let valueElementsInput = this.inputVales.map(element => {
+            let idName = this.shadowRoot.querySelector('#'+ element.id).value;
+            return {name: element.name, value: idName}
+        })
+        let event = new CustomEvent('set-data-catalog', {
+            detail: valueElementsInput,
+            bubbles: true,
+            composed: true
+        });
+        this.dispatchEvent(event);
+    }
+    
 }
 customElements.define('formulario-generico', FormularioGenerico);

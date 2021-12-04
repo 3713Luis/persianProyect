@@ -115,6 +115,59 @@ export class CatalogoSerch extends LitElement {
                         ]
                     }
                 },
+            },
+            formElement: {
+                classContaine: '',
+                container: [
+                    'Background: red;',
+                    "color: yellow;",
+                ],
+                classSubcontainer: '',
+                subcontainer: [
+                    'Background: red;',
+                    "color: yellow;",
+                ],
+                item: [
+                    {
+                        label: {
+                            style: [
+                                'Background: red;',
+                                "color: yellow;",
+                            ],
+                            class: '',
+                            value: 'Ingresa tu nombre'
+                        },
+                        input: {
+                            style: [
+                                'Background: red;',
+                                "color: blue;",
+                            ],
+                            class: '',
+                            inputId: 'input-1',
+                            name: 'inputName',
+                        },
+                        
+                    },
+                    {
+                        label: {
+                            style: [
+                                'Background: red;',
+                                "color: yellow;",
+                            ],
+                            class: '',
+                            value: 'Ingresa tu nombre'
+                        },
+                        input: {
+                            style: [
+                                'Background: red;',
+                                "color: black;",
+                            ],
+                            class: '',
+                            inputId: 'input-2',
+                            name: 'inputName',
+                        },
+                    }
+                ],
             }
         };
 
@@ -126,9 +179,9 @@ export class CatalogoSerch extends LitElement {
         return html`
 
         <formulario-generico .objElements="${this.titulo}"></formulario-generico>
-        <div class="contenedor">
-            Chompis me la pelas
-        </div>
+        <!-- <div class="contenedor">
+                            Chompis me la pelas
+                        </div> -->
        
         `;
     }

@@ -9,6 +9,9 @@ export class CatalogoDm extends LitElement {
         return {
             arrayData: {
                 type: Array
+            },
+            catalogView: {
+                type: Boolean
             }
         };
     }
@@ -16,6 +19,7 @@ export class CatalogoDm extends LitElement {
     constructor(){
         super();
         this.arrayData = [];
+        this.catalogView = false;
     }
 
     connectedCallback() {
@@ -31,7 +35,9 @@ export class CatalogoDm extends LitElement {
 
     render() {
         return html`
-                     <catalogo-serch></catalogo-serch>
+            ${this.catalogView ? 
+                html `<catalogo-serch></catalogo-serch>`
+            : ''}
         `;
     }
 }

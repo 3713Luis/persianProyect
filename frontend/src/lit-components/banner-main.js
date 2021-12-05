@@ -39,6 +39,7 @@ export class BannerMain extends LitElement {
       */
     constructor() {
         super();
+        console.log('banner-main');
         this.arrayData = [];
         this.commonUrl = 'http://localhost:3050/';
         this.objectData = {};
@@ -81,7 +82,6 @@ export class BannerMain extends LitElement {
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Convirtiendo</span>
     </button>
-    ${this.objectData.view}
     ${this.objectData.view === true ? this.arrayData.map(element => {
     return html`
     <img class="img" src="${this.getUrlImage(element)}">`

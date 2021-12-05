@@ -46,7 +46,6 @@ export class FormularioGenerico extends LitElement {
             height: auto;
         }
         .container-img {
-            background: #ccc;
             width: 100%;
         }
         .image {
@@ -56,15 +55,12 @@ export class FormularioGenerico extends LitElement {
             margin: auto;
         }
         .input-select {
-            background: #8BFEEA;
             display: block;
             margin:auto;
         }
         .container-area {
-            background: red;
         }
         .text-area {
-            background: blue;
         }
         `
     }

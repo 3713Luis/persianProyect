@@ -7,12 +7,15 @@ export class CatalogoSerch extends LitElement {
             
         }
         .contenedor {
-            background: orange;
             margin-left: 5%;
             margin-right: 5%;
         }
         .titulo: {
             color: red;
+        }
+        .form: {
+            background: red;
+            display: none;
         }
     `
     }
@@ -42,7 +45,6 @@ export class CatalogoSerch extends LitElement {
                 hCustom: "",
                 style: [
                     "color: black;",
-                    "background: red;",
                     "font-size: 30px;"
                 ]
 
@@ -59,7 +61,6 @@ export class CatalogoSerch extends LitElement {
                     contenImage: {
                         class: 'container-img',
                         containerImg: [
-                            "background: yellow;",
                             "width: 100%;"
                         ]
                     },
@@ -75,7 +76,6 @@ export class CatalogoSerch extends LitElement {
                     inputSelect: {
                         class: 'input-select',
                         inputStyle: [
-                            "background: red;",
                             "display: block;",
                             "margin:auto;",
                         ]
@@ -88,10 +88,10 @@ export class CatalogoSerch extends LitElement {
                     {
                         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
                         styleText: {
-                            class: 'text-area',
+                            class: '',
                             text: [
-                                'Background: red;',
-                                "color: green;",
+                                // 'Background: red;',
+                                // "color: green;",
                             ]
                         }
                     },
@@ -100,18 +100,18 @@ export class CatalogoSerch extends LitElement {
                         styleText: {
                             class: 'text-area',
                             text: [
-                                'Background: blue;',
-                                "color: brown;",
+                                // 'Background: blue;',
+                                // "color: brown;",
                             ]
                         }
                     }
                 ],
                 styleContainer: {
                     container: {
-                        class: 'container-area',
+                        class: '',
                         containerTextArea: [
-                            'Background: red;',
-                            "color: yellow;",
+                            // 'Background: red;',
+                            // "color: yellow;",
                         ]
                     }
                 },
@@ -119,28 +119,28 @@ export class CatalogoSerch extends LitElement {
             formElement: {
                 classContaine: '',
                 container: [
-                    'Background: red;',
-                    "color: yellow;",
+                    // 'Background: red;',
+                    // "color: yellow;",
                 ],
                 classSubcontainer: '',
                 subcontainer: [
-                    'Background: red;',
-                    "color: yellow;",
+                    // 'Background: red;',
+                    // "color: yellow;",
                 ],
                 item: [
                     {
                         label: {
                             style: [
-                                'Background: red;',
-                                "color: yellow;",
+                                // 'Background: red;',
+                                // "color: yellow;",
                             ],
                             class: '',
                             value: 'Ingresa tu nombre'
                         },
                         input: {
                             style: [
-                                'Background: red;',
-                                "color: blue;",
+                                // 'Background: red;',
+                                // "color: blue;",
                             ],
                             class: '',
                             inputId: 'input-1',
@@ -151,16 +151,16 @@ export class CatalogoSerch extends LitElement {
                     {
                         label: {
                             style: [
-                                'Background: red;',
-                                "color: yellow;",
+                                // 'Background: red;',
+                                // "color: yellow;",
                             ],
                             class: '',
                             value: 'Ingresa tu nombre'
                         },
                         input: {
                             style: [
-                                'Background: red;',
-                                "color: black;",
+                                // 'Background: red;',
+                                // "color: black;",
                             ],
                             class: '',
                             inputId: 'input-2',
@@ -170,18 +170,15 @@ export class CatalogoSerch extends LitElement {
                 ],
             }
         };
-
-
     }
 
 
     render() {
         return html`
-
-        <formulario-generico .objElements="${this.titulo}"></formulario-generico>
-        <!-- <div class="contenedor">
+    <!-- <formulario-generico .objElements="${this.titulo}"></formulario-generico> -->
+        <div class="contenedor">
                             Chompis me la pelas
-                        </div> -->
+                        </div>
        
         `;
     }

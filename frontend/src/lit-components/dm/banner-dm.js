@@ -16,6 +16,12 @@ export class BannerDm extends LitElement {
         },
         urlImage: {
             type: String
+        },
+        bannerSlider: {
+            type: Boolean
+        },
+        bannerForm: {
+            type: Boolean
         }
     };
 }
@@ -26,6 +32,8 @@ export class BannerDm extends LitElement {
       */
     constructor() {
         super();
+        this.bannerSlider = false;
+        this.bannerForm = false;
         this.arrayData = [];
         this.objectData = {};
         this.urlImage = "x"
@@ -35,8 +43,13 @@ export class BannerDm extends LitElement {
 
     render() {
         return html`
-        <!-- <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main> -->
+        ${this.bannerView ? html `
+            <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
+        `: ''}
+        ${this.bannerForm ? html `
         <form-banner></form-banner>
+        `: ''}
+        
         `;
     }
 

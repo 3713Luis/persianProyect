@@ -16,18 +16,15 @@ head title {
 }
 
 .banner {
-    background: green;
     height: auto;
     padding: 5px;
     margin-bottom: 10px;
 }
 .catalogo {
-    background: yellow;
     height: auto;
     padding: 5px;
     margin-bottom: 10px;
 }
 .footer {
     height: auto;
-    background: blue;
 }

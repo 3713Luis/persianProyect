@@ -32,18 +32,17 @@ export class HeaderMain extends LitElement {
       */
     constructor() {
         super();
-         
-
     }
+
     render() {
         return html`
         <div class="header-navigation">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Categorias</a>
+              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Categorias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Promociones</a>
+              <a class="nav-link" href="#" @click="${() => {this.viewSelect('catalogo')}}">Catalogo</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">perfil</a>
@@ -51,6 +50,14 @@ export class HeaderMain extends LitElement {
           </ul>
       </div>
         `;
+    }
+    viewSelect(param) {
+      let event = new CustomEvent('show-views', {
+        detail: param,
+        bubbles: true,
+        composed: true
+    });
+    this.dispatchEvent(event);
     }
 }
 customElements.define('header-main', HeaderMain);

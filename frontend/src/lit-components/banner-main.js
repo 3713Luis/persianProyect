@@ -39,7 +39,6 @@ export class BannerMain extends LitElement {
       */
     constructor() {
         super();
-        console.log('banner-main');
         this.arrayData = [];
         this.commonUrl = 'http://localhost:3050/';
         this.objectData = {};
@@ -93,7 +92,6 @@ export class BannerMain extends LitElement {
     }
 
     getUrlImage(element) {
-        debugger;
         return this.commonUrl + element.urlName;
     }
 }

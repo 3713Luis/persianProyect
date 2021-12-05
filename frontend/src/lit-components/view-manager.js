@@ -31,7 +31,7 @@ export class ViewManager extends LitElement {
 
    constructor() {
        super();
-       this.bannerSlider = false;
+       this.bannerSlider = true;
        this.bannerForm = false;
        this.catalogoView = false;
    }
@@ -45,8 +45,11 @@ export class ViewManager extends LitElement {
       this.reset();
     if (event.detail === 'banner') {
         this.bannerForm = true;
-    }else if(event.detail === 'catalogo') {
+    } else if(event.detail === 'catalogo') {
         this.catalogoView = true;
+    } else if(event.detail === 'inicio') {
+        this.reset();
+        this.bannerSlider = true;
     }
   }
 
@@ -62,7 +65,7 @@ export class ViewManager extends LitElement {
                 <header-main></header-main>
             </div>
             <div class="banner">
-                <banner-dm .bannerView="${this.bannerSlider}" .bannerForm="${this.bannerForm}"></banner-dm>
+                <banner-dm .bannerSlider="${this.bannerSlider}" .bannerForm="${this.bannerForm}"></banner-dm>
             </div>
             <div class="catalogo">
                 <catalogo-dm .catalogView="${this.catalogoView}"></catalogo-dm>

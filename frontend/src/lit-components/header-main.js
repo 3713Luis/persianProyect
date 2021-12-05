@@ -21,7 +21,7 @@ export class HeaderMain extends LitElement {
       */
     static get properties() {
         return {
-            import: { type: String}
+            userType: { type: String}
         };
     }
 
@@ -32,25 +32,50 @@ export class HeaderMain extends LitElement {
       */
     constructor() {
         super();
+        this.userType = 'admin';
     }
 
     render() {
         return html`
         <div class="header-navigation">
           <ul class="nav nav-pills card-header-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Categorias</a>
+          <li class="nav-item">
+              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('inicio')}}">Inicio</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" @click="${() => {this.viewSelect('catalogo')}}">Catalogo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">perfil</a>
-            </li>
+            ${this.optionsUser()}
           </ul>
       </div>
         `;
     }
+
+    optionsUser(){
+      console.log(this.userType);
+      if (this.userType === 'admin') {
+         return this.renderAdmin();
+      } else if (this.userType === 'costumer'){
+        return this.renderCostumer();
+      }
+    };
+
+    renderAdmin() {
+      return html`
+      <li class="nav-item">
+              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Configurar Banner</a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Configurar Catalogo</a>
+        </li>
+      `;
+    }
+
+    renderCostumer() {
+      return html`
+      <li class="nav-item">
+              <a class="nav-link" href="#" @click="${() => {this.viewSelect('catalogo')}}">Buscar</a>
+            </li>
+      `;
+    }
+
     viewSelect(param) {
       let event = new CustomEvent('show-views', {
         detail: param,

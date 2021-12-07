@@ -17,23 +17,26 @@ export class ViewManager extends LitElement {
      */
    static get properties() {
        return {
-        bannerSlider: {
-            type: Boolean
+        showViewId: {
+            type: String
         },
-        bannerForm: {
-            type: Boolean
+        initShowViwes: {
+            type: Object
         },
-        catalogoView: {
-            type: Boolean
+        currentView: {
+            type: String
         }
        };
    }
 
    constructor() {
        super();
-       this.bannerSlider = true;
-       this.bannerForm = false;
-       this.catalogoView = false;
+       this.showViewId = 'inicio';
+       this.currentView = 'inicio';
+       this.initShowViwes = {
+           slider: 'slider',
+           catalogo: 'catalogo',
+       }
    }
 
    connectedCallback() {
@@ -41,34 +44,58 @@ export class ViewManager extends LitElement {
     this.addEventListener('show-views', this.selectedView);
   }
 
-  selectedView(event) {
-      this.reset();
-    if (event.detail === 'banner') {
-        this.bannerForm = true;
-    } else if(event.detail === 'catalogo') {
-        this.catalogoView = true;
-    } else if(event.detail === 'inicio') {
+  selectedView(event) {    
         this.reset();
-        this.bannerSlider = true;
-    }
+        this.showViewId = event.detail;
+        if (this.showViewId != 'inicio') {
+            if (this.currentView != 'inicio') {
+               let flag = this.showMessage();
+               if (flag === false) {
+                this.showViewId = this.currentView;
+             }
+            }
+            this.changeView();
+        } else if(this.showViewId === 'inicio') {
+           let flag = this.showMessage();
+           if (flag) {
+                this.reset();
+                this.currentView = 'inicio';
+           } else {
+               this.initShowViwes = {};
+               this.showViewId = event.detail;
+               this.showViewId = this.currentView;
+               this.changeView();
+           }
+        }
+  }
+
+ 
+
+  showMessage() {
+    return confirm('Seguro que desea salir?... Se borrara tu progreso');
+  }
+  changeView() {
+    this.currentView = this.showViewId;
+    this.initShowViwes = {};
   }
 
   reset() {
-    this.bannerSlider = false;
-    this.bannerForm = false;
-    this.catalogoView = false;
+    this.initShowViwes = {
+        slider: 'slider',
+        catalogo: 'catalogo',
+    };
   }
 
     render() {
         return html`
             <div class="header">
-                <header-main></header-main>
+                <header-main .currentView="${this.currentView}"></header-main>
             </div>
             <div class="banner">
-                <banner-dm .bannerSlider="${this.bannerSlider}" .bannerForm="${this.bannerForm}"></banner-dm>
+                <banner-dm  .initShowViwes="${this.initShowViwes}" .showViewId="${this.showViewId}"></banner-dm>
             </div>
             <div class="catalogo">
-                <catalogo-dm .catalogView="${this.catalogoView}"></catalogo-dm>
+                <catalogo-dm .initShowViwes="${this.initShowViwes}" .showViewId="${this.showViewId}"></catalogo-dm>
             </div>
             <div class="footer">
                 footer  </div>

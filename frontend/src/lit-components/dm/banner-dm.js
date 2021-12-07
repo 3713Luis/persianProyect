@@ -22,6 +22,12 @@ export class BannerDm extends LitElement {
         },
         bannerForm: {
             type: Boolean
+        },
+        showViewId: {
+            type: String
+        },
+        initShowViwes: {
+            type: Object 
         }
     };
 }
@@ -32,6 +38,8 @@ export class BannerDm extends LitElement {
       */
     constructor() {
         super();
+        this.initShowViwes = {};
+        this.showViewId = '';
         this.bannerSlider = false;
         this.bannerForm = false;
         this.arrayData = [];
@@ -43,11 +51,11 @@ export class BannerDm extends LitElement {
 
     render() {
         return html`
-        ${this.bannerSlider ? html `
+        ${this.showViewId === 'slider' || this.initShowViwes.slider === 'slider' ? html `
             <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
         `: ''}
-        ${this.bannerForm ? html `
-        <form-banner></form-banner>
+        ${this.showViewId === 'form' ? html `
+            <form-banner></form-banner>
         `: ''}
         
         `;

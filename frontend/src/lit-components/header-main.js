@@ -13,6 +13,10 @@ export class HeaderMain extends LitElement {
           display: inline;
           margin-left: 20px;
         }
+        .disabled {
+          cursor: not-allowed;
+          pointer-events: none;
+        }
         `;
     }
 
@@ -21,7 +25,13 @@ export class HeaderMain extends LitElement {
       */
     static get properties() {
         return {
-            userType: { type: String}
+            userType: { type: String},
+            classIndicators: {
+              type: Object
+            },
+            currentView: {
+              type: String
+            }
         };
     }
 
@@ -33,14 +43,21 @@ export class HeaderMain extends LitElement {
     constructor() {
         super();
         this.userType = 'admin';
+        this.classIndicator = {
+          bannerLink: '',
+          catalogoLink: '',
+          inicio: 'disabled'
+        }
+        this.currentView = '';
     }
 
     render() {
         return html`
         <div class="header-navigation">
           <ul class="nav nav-pills card-header-pills">
+          ${this.disabledLinks()}
           <li class="nav-item">
-              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('inicio')}}">Inicio</a>
+              <a class="${this.classIndicator.inicio}" href="#" @click="${() => {this.viewSelect('inicio')}}">Inicio</a>
             </li>
             ${this.optionsUser()}
           </ul>
@@ -49,7 +66,6 @@ export class HeaderMain extends LitElement {
     }
 
     optionsUser(){
-      console.log(this.userType);
       if (this.userType === 'admin') {
          return this.renderAdmin();
       } else if (this.userType === 'costumer'){
@@ -60,13 +76,34 @@ export class HeaderMain extends LitElement {
     renderAdmin() {
       return html`
       <li class="nav-item">
-              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Configurar Banner</a>
+              <a id="bannerLink" class="${this.classIndicator.bannerLink}" href="#" @click="${() => {this.viewSelect('form')}}" >Configurar Banner</a>
         </li>
         <li class="nav-item">
-              <a class="nav-link active" href="#" @click="${() => {this.viewSelect('banner')}}">Configurar Catalogo</a>
+              <a class="${this.classIndicator.catalogoLink}" href="#" @click="${() => {this.viewSelect('formCatalog')}}">Configurar Catalogo</a>
         </li>
       `;
     }
+
+    disabledLinks() {
+      this.resetLinks();
+    if (this.currentView === 'form') {
+      this.classIndicator = {
+        bannerLink: 'disabled'
+      }
+    } else if(this.currentView === 'formCatalog') {
+      this.classIndicator = {
+        catalogoLink: 'disabled'
+      }
+    } else if (this.currentView === 'inicio') {
+      this.resetLinks();
+    }
+  }
+
+  resetLinks() {
+    this.classIndicator.bannerLink = '';
+    this.classIndicator.catalogoLink = '';
+    this.classIndicator.inicio = 'disabled';
+  }
 
     renderCostumer() {
       return html`
@@ -75,6 +112,7 @@ export class HeaderMain extends LitElement {
             </li>
       `;
     }
+
 
     viewSelect(param) {
       let event = new CustomEvent('show-views', {

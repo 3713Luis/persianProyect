@@ -12,7 +12,13 @@ export class CatalogoDm extends LitElement {
             },
             catalogView: {
                 type: Boolean
-            }
+            },
+            initShowViwes: {
+                type: Object
+            },
+            showViewId: {
+                type: String
+            },
         };
     }
 
@@ -20,6 +26,7 @@ export class CatalogoDm extends LitElement {
         super();
         this.arrayData = [];
         this.catalogView = false;
+        this.initShowViwes = {};
     }
 
     connectedCallback() {
@@ -35,7 +42,10 @@ export class CatalogoDm extends LitElement {
 
     render() {
         return html`
-            ${this.catalogView ? 
+            ${this.showViewId === 'catalogo' || this.initShowViwes.catalogo === 'catalogo' ? 
+                html `<catalogo-serch></catalogo-serch>`
+            : ''}
+            ${this.showViewId === 'formCatalog' ? 
                 html `<catalogo-serch></catalogo-serch>`
             : ''}
         `;

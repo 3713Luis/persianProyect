@@ -32,13 +32,14 @@ banner.post('/api/add/img', (request, response) => {
 banner.post('/api/select/upload', fileUpload, (request, response) => {
     const sql = `INSERT INTO BANNER SET ?`
     const dataFile = fs.readFileSync(url + request.file.filename);
-
     const object = {
         estatus: request.body.estado,
-        nombre_img: request.file.filename,
+        nombre_img: request.body.nombre_img,
         tipo: request.file.mimetype,
         base64_img: dataFile
     }
+    console.log(url);
+
     utils.insert(sql, object, response, "Registro exitoso");
 });
 

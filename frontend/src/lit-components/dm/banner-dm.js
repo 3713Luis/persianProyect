@@ -28,6 +28,12 @@ export class BannerDm extends LitElement {
                 },
                 initShowViwes: {
                     type: Object
+                },
+                sendEvent: {
+                    type: String
+                },
+                reload: {
+                    type: Boolean
                 }
             };
         }
@@ -38,6 +44,7 @@ export class BannerDm extends LitElement {
          */
     constructor() {
         super();
+        console.log("Volvio a entrar");
         this.initShowViwes = {};
         this.showViewId = '';
         this.bannerSlider = false;
@@ -45,14 +52,34 @@ export class BannerDm extends LitElement {
         this.arrayData = [];
         this.objectData = {};
         this.urlImage = "x"
+        this.reload = false;
         this.getData();
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('set-data-banner', this.handleResize);
+        window.addEventListener('reload-data', () => {
+            console.log('recargando');
+            this.getData();
+            this.reload = true;
+        });
+
+    }
+
+    handleResize(event) {
+        console.log(event.detail);
+        let data = event.detail;
+        if (data.img && data.select) {
+            console.log("Mandando al Post");
+            postImagesPromise(data.img);
+        }
+    }
 
     render() {
             return html `
         ${this.showViewId === 'slider' || this.initShowViwes.slider === 'slider' ? html `
-            <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
+        <banner-main .arrayData="${this.arrayData}" .objectData="${this.objectData}" .urlImage="${this.urlImage}"></banner-main>
         `: ''}
         ${this.showViewId === 'form' ? html `
             <form-banner></form-banner>

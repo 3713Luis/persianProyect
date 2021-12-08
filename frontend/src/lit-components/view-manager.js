@@ -120,7 +120,7 @@ export class ViewManager extends LitElement {
          </div>   
            
             <div class="footer">
-                footer  
+                  
             </div>
         `;
     }

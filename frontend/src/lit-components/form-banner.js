@@ -16,12 +16,13 @@ export class FormBanner extends LitElement {
             },
             dataForm: {
                 type: Object
-            }
+            },
         };
     }
     constructor() {
         super();
         this.dataForm = {
+            eventName: 'set-data-banner',
             titulo: {
                 texto: "Configuración de Banner",
                 class: '',

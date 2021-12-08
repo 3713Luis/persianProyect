@@ -21,6 +21,12 @@ export class FormularioGenerico extends LitElement {
             },
             inputVales: {
                 type: Array
+            },
+            sendEvent: {
+                type: String
+            },
+            reset: {
+                type: Boolean
             }
         };
     }
@@ -33,6 +39,8 @@ export class FormularioGenerico extends LitElement {
         this.method = 'GET';
         this.action = '';
         this.inputVales = [];
+        this.sendEvent = '';
+        this.reset = false;
     }
 
     static get styles() {
@@ -71,6 +79,7 @@ export class FormularioGenerico extends LitElement {
 
     render() {
         return html `
+            ${this.objElements.eventName ?  this.getEvent(): ''}
             ${this.objElements.titulo ? this.buildTitle() : ''}
             ${this.objElements.ImagePreview ? this.buidPreViewImage(): ''}
             ${this.objElements.select ? this.buildSelect(): ''}
@@ -79,13 +88,18 @@ export class FormularioGenerico extends LitElement {
             ${this.objElements.button ? this.buildButon(): ''}       
         `;
     }
+
+    getEvent() {
+        this.sendEvent = this.objElements.eventName;
+    }
+
     buildSelect() {
             return html `
         <div style="${this.objElements.select.styleContent}">
-        <select style="${this.getAdditionalStyles(this.objElements.select.styles)}">
+        <select id="selectId" style="${this.getAdditionalStyles(this.objElements.select.styles)}">
                 ${this.objElements.select.selectData.map((element) => {
                   return  html `
-                        <option value="item-${element.value}">${element.value}</option>
+                        <option value="${element.value}">${element.value}</option>
                     `
                 })}
             </select>
@@ -138,6 +152,7 @@ export class FormularioGenerico extends LitElement {
     }
 
     loadImage(event) {
+        this.files = event.target.files[0];
         let read_img = new FileReader();
         read_img.readAsDataURL(event.target.files[0]);
         let image = this.shadowRoot.querySelector('#image');
@@ -177,7 +192,6 @@ export class FormularioGenerico extends LitElement {
               ${this.getStylesToArray()}
             </div>
         </div>
-           
         `
     }
 
@@ -204,17 +218,40 @@ export class FormularioGenerico extends LitElement {
         `
     }
 
+    sendHandler() {
+        if (this.files) {
+            const formDta = new FormData();
+            formDta.append('image', this.files);
+            formDta.set('estado', this.shadowRoot.querySelector('#selectId').value);
+            formDta.set('nombre_img', this.files.name);
+            return formDta;
+        }
+    }
+
     getElements() {
+        console.log('Recuperando Datos');
         let valueElementsInput = this.inputVales.map(element => {
             let idName = this.shadowRoot.querySelector('#'+ element.id).value;
             return {name: element.name, value: idName}
         })
-        let event = new CustomEvent('set-data-catalog', {
-            detail: valueElementsInput,
+
+        let data = {
+            img: this.sendHandler(),
+            select: this.shadowRoot.querySelector('#selectId').value,
+            input: valueElementsInput
+        };
+        let event = new CustomEvent(this.sendEvent, {
+            detail: data,
             bubbles: true,
             composed: true
         });
-        this.dispatchEvent(event);
+        this.resetElements();
+        // this.dispatchEvent(event);
+    }
+
+    resetElements() {
+       console.log("Haciendo reset");
+        this.reset = true;
     }
     
 }

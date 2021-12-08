@@ -2,12 +2,15 @@ import { LitElement, html, css } from 'lit';
 export class HeaderMain extends LitElement {
 
     static get styles() {
-        return css`
+        return css `
          :host {
                 display: block;
             }
         .header-navigation {
+              padding-top: 20px;
               display: block;
+              background: #a0a1e9;
+              height: 50px;
             }
         .nav-item {
           display: inline;
@@ -17,44 +20,47 @@ export class HeaderMain extends LitElement {
           cursor: not-allowed;
           pointer-events: none;
         }
+        .contenUl {
+          margin: 0;
+        }
         `;
     }
 
     /**
-      * Declared properties and their corresponding attributes
-      */
+     * Declared properties and their corresponding attributes
+     */
     static get properties() {
         return {
-            userType: { type: String},
+            userType: { type: String },
             classIndicators: {
-              type: Object
+                type: Object
             },
             currentView: {
-              type: String
+                type: String
             }
         };
     }
 
     /**
-      * Instance of the element is created/upgraded. Useful for initializing
-      * state, set up event listeners, create shadow dom.
-      * @constructor
-      */
+     * Instance of the element is created/upgraded. Useful for initializing
+     * state, set up event listeners, create shadow dom.
+     * @constructor
+     */
     constructor() {
         super();
         this.userType = 'admin';
         this.classIndicator = {
-          bannerLink: '',
-          catalogoLink: '',
-          inicio: 'disabled'
+            bannerLink: '',
+            catalogoLink: '',
+            inicio: 'disabled'
         }
         this.currentView = '';
     }
 
     render() {
-        return html`
+        return html `
         <div class="header-navigation">
-          <ul class="nav nav-pills card-header-pills">
+          <ul class="contenUl">
           ${this.disabledLinks()}
           <li class="nav-item">
               <a class="${this.classIndicator.inicio}" href="#" @click="${() => {this.viewSelect('inicio')}}">Inicio</a>
@@ -65,16 +71,16 @@ export class HeaderMain extends LitElement {
         `;
     }
 
-    optionsUser(){
-      if (this.userType === 'admin') {
-         return this.renderAdmin();
-      } else if (this.userType === 'costumer'){
-        return this.renderCostumer();
-      }
+    optionsUser() {
+        if (this.userType === 'admin') {
+            return this.renderAdmin();
+        } else if (this.userType === 'costumer') {
+            return this.renderCostumer();
+        }
     };
 
     renderAdmin() {
-      return html`
+        return html `
       <li class="nav-item">
               <a id="bannerLink" class="${this.classIndicator.bannerLink}" href="#" @click="${() => {this.viewSelect('form')}}" >Configurar Banner</a>
         </li>
@@ -85,28 +91,28 @@ export class HeaderMain extends LitElement {
     }
 
     disabledLinks() {
-      this.resetLinks();
-    if (this.currentView === 'form') {
-      this.classIndicator = {
-        bannerLink: 'disabled'
-      }
-    } else if(this.currentView === 'formCatalog') {
-      this.classIndicator = {
-        catalogoLink: 'disabled'
-      }
-    } else if (this.currentView === 'inicio') {
-      this.resetLinks();
+        this.resetLinks();
+        if (this.currentView === 'form') {
+            this.classIndicator = {
+                bannerLink: 'disabled'
+            }
+        } else if (this.currentView === 'formCatalog') {
+            this.classIndicator = {
+                catalogoLink: 'disabled'
+            }
+        } else if (this.currentView === 'inicio') {
+            this.resetLinks();
+        }
     }
-  }
 
-  resetLinks() {
-    this.classIndicator.bannerLink = '';
-    this.classIndicator.catalogoLink = '';
-    this.classIndicator.inicio = 'disabled';
-  }
+    resetLinks() {
+        this.classIndicator.bannerLink = '';
+        this.classIndicator.catalogoLink = '';
+        this.classIndicator.inicio = 'disabled';
+    }
 
     renderCostumer() {
-      return html`
+        return html `
       <li class="nav-item">
               <a class="nav-link" href="#" @click="${() => {this.viewSelect('catalogo')}}">Buscar</a>
             </li>
@@ -115,12 +121,12 @@ export class HeaderMain extends LitElement {
 
 
     viewSelect(param) {
-      let event = new CustomEvent('show-views', {
-        detail: param,
-        bubbles: true,
-        composed: true
-    });
-    this.dispatchEvent(event);
+        let event = new CustomEvent('show-views', {
+            detail: param,
+            bubbles: true,
+            composed: true
+        });
+        this.dispatchEvent(event);
     }
 }
 customElements.define('header-main', HeaderMain);

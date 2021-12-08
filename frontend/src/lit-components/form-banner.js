@@ -3,12 +3,12 @@ import { LitElement, html, css } from 'lit';
 export class FormBanner extends LitElement {
 
     static get styles() {
-        return css`
+            return css `
         `
-    }
-    /**
-      * Declared properties and their corresponding attributes
-      */
+        }
+        /**
+         * Declared properties and their corresponding attributes
+         */
     static get properties() {
         return {
             files: {
@@ -23,12 +23,15 @@ export class FormBanner extends LitElement {
         super();
         this.dataForm = {
             titulo: {
-                texto: "Chompiras me la pelas",
-                class: 'lol',
-                hCustom: "",
+                texto: "Configuración de Banner",
+                class: '',
+                hCustom: "1",
                 style: [
-                    "color: black;",
-                    "font-size: 30px;"
+
+                ],
+                styleContent: [
+                    "text-align: center;",
+                    "margin-bottom: 20px;"
                 ]
 
             },
@@ -61,108 +64,55 @@ export class FormBanner extends LitElement {
                         inputStyle: [
                             "display: block;",
                             "margin:auto;",
+                            "background: #1aa0b1;",
+                            "margin-bottom: 30px;"
                         ]
                     }
 
                 },
             },
-            textArea: {
-                textArray: [
-                    {
-                        text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
-                        styleText: {
-                            class: '',
-                            text: [
-                                // 'Background: red;',
-                                // "color: green;",
-                            ]
-                        }
-                    },
-                    {
-                        text: '¿Cula no se que blalala?',
-                        styleText: {
-                            class: 'text-area',
-                            text: [
-                                // 'Background: blue;',
-                                // "color: brown;",
-                            ]
-                        }
-                    }
-                ],
-                styleContainer: {
-                    container: {
-                        class: '',
-                        containerTextArea: [
-                            // 'Background: red;',
-                            // "color: yellow;",
+            select: {
+                selectData: [{
+                        value: "Selecciona",
+                        styles: [
+                            "background:red;"
                         ]
-                    }
-                },
-            },
-            formElement: {
-                classContaine: '',
-                container: [
-                    // 'Background: red;',
-                    // "color: yellow;",
-                ],
-                classSubcontainer: '',
-                subcontainer: [
-                    // 'Background: red;',
-                    // "color: yellow;",
-                ],
-                item: [
-                    {
-                        label: {
-                            style: [
-                                // 'Background: red;',
-                                // "color: yellow;",
-                            ],
-                            class: '',
-                            value: 'Ingresa tu nombre'
-                        },
-                        input: {
-                            style: [
-                                // 'Background: red;',
-                                // "color: blue;",
-                            ],
-                            class: '',
-                            inputId: 'input-1',
-                            name: 'inputName',
-                        },
-                        
+                    }, {
+                        value: "Activo",
+                        styles: [
+                            "background:red;"
+                        ]
                     },
                     {
-                        label: {
-                            style: [
-                                // 'Background: red;',
-                                // "color: yellow;",
-                            ],
-                            class: '',
-                            value: 'Ingresa tu nombre'
-                        },
-                        input: {
-                            style: [
-                                // 'Background: red;',
-                                // "color: black;",
-                            ],
-                            class: '',
-                            inputId: 'input-2',
-                            name: 'inputName',
-                        },
-                    }
+                        value: "Inactivo",
+                        styles: [
+                            "background:blue;"
+                        ]
+                    },
                 ],
+                styles: [
+                    "margin-bottom: 20px"
+                ],
+                styleContent: [
+                    "text-align: center;",
+                ]
+            },
+            button: {
+                styleContent: [
+                    "text-align: center;"
+                ],
+                text: 'Enviar Formulario',
+                style: [
+                    "margin-bottom: 20px;"
+                ]
             }
+
         };
     }
 
     render() {
-        return html`
+        return html `
             <formulario-generico .objElements="${this.dataForm}"></formulario-generico>
-
-           <div>
-               <input @change="${(e) => {this.onChange(e)}}" name="image" type="file"/>
-               <button @click="${this.sendHandler}" type="button">Upload</button>
-           </div>
         `;
     }
 
@@ -180,8 +130,8 @@ export class FormBanner extends LitElement {
         }
     }
 
-     postData(formData) {         
-         postImagesPromise(formData);
+    postData(formData) {
+        postImagesPromise(formData);
     }
 }
 customElements.define('form-banner', FormBanner);

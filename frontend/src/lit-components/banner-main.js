@@ -3,7 +3,7 @@ import { LitElement, html, css } from 'lit';
 export class BannerMain extends LitElement {
 
     static get styles() {
-        return css`
+            return css `
        :host {
         display: block;
     }
@@ -11,10 +11,10 @@ export class BannerMain extends LitElement {
            background: purple;
        }
        `
-    }
-    /**
-      * Object describing property-related metadata used by Polymer features
-      */
+        }
+        /**
+         * Object describing property-related metadata used by Polymer features
+         */
     static get properties() {
         return {
             arrayData: {
@@ -33,10 +33,10 @@ export class BannerMain extends LitElement {
     }
 
     /**
-      * Instance of the element is created/upgraded. Useful for initializing
-      * state, set up event listeners, create shadow dom.
-      * @constructor
-      */
+     * Instance of the element is created/upgraded. Useful for initializing
+     * state, set up event listeners, create shadow dom.
+     * @constructor
+     */
     constructor() {
         super();
         this.arrayData = [];
@@ -44,10 +44,10 @@ export class BannerMain extends LitElement {
         this.objectData = {};
     }
 
-    
+
 
     render() {
-        return html`
+            return html `
     <!-- <div  class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -83,7 +83,7 @@ export class BannerMain extends LitElement {
     </button>
     ${this.objectData.view === true ? this.arrayData.map(element => {
     return html`
-    <img class="img" src="${this.getUrlImage(element)}">`
+    <img style="width:40%; height: auto" class="img" src="${this.getUrlImage(element)}">`
     }) : html `<p>No hay nada que mostrar por el momento</p>`}
     `;}
 

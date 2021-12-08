@@ -36,7 +36,7 @@ export class FormularioGenerico extends LitElement {
     }
 
     static get styles() {
-        return css`
+        return css `
         :host {
             
             display: block;
@@ -62,24 +62,44 @@ export class FormularioGenerico extends LitElement {
         }
         .text-area {
         }
+        .containerTitle {
+            background: red;
+            margin: auto;
+        }
         `
     }
 
     render() {
-        return html`
+        return html `
             ${this.objElements.titulo ? this.buildTitle() : ''}
             ${this.objElements.ImagePreview ? this.buidPreViewImage(): ''}
+            ${this.objElements.select ? this.buildSelect(): ''}
             ${this.objElements.textArea ? this.buildLoremArea() : ''}
-            ${this.objElements.formElement ? this.buildInput() : html`<p>no hay valores de input</p>`}
-            ${this.buildButon()}       
+            ${this.objElements.formElement ? this.buildInput() : ''}
+            ${this.objElements.button ? this.buildButon(): ''}       
         `;
+    }
+    buildSelect() {
+            return html `
+        <div style="${this.objElements.select.styleContent}">
+        <select style="${this.getAdditionalStyles(this.objElements.select.styles)}">
+                ${this.objElements.select.selectData.map((element) => {
+                  return  html `
+                        <option value="item-${element.value}">${element.value}</option>
+                    `
+                })}
+            </select>
+        </div>
+        `
     }
 
     buildTitle() {
         switch (this.objElements.titulo.hCustom) {
             case "1":
                 return html`
-                    <h1 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
+                   <div style="${this.getAdditionalStyles(this.objElements.titulo.styleContent)}">
+                   <h1 style="${this.getAdditionalStyles(this.objElements.titulo.style)}" class="${this.objElements.titulo.class}">${this.objElements.titulo.texto}</h1>
+                   </div> 
                     `;
             case "2":
                 return html`
@@ -178,7 +198,9 @@ export class FormularioGenerico extends LitElement {
 
     buildButon() {
         return html `
-            <button type="button" @click="${this.getElements}">Enviar Formulario</button>
+           <div style="${this.getAdditionalStyles(this.objElements.button.styleContent)}">
+                <button style="${this.getAdditionalStyles(this.objElements.button.style)}" type="button" @click="${this.getElements}">${this.objElements.button.text}</button>
+           </div> 
         `
     }
 

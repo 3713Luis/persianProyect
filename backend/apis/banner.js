@@ -6,10 +6,10 @@ const path = require('path');
 const fs = require('fs');
 const url = path.join(__dirname, 'tempImage/');
 const diskstorage = multer.diskStorage({
-    destination: (req,file, cb) => {
+    destination: (req, file, cb) => {
         cb(null, url)
     },
-    filename: (req,file, cb) => {
+    filename: (req, file, cb) => {
         cb(null, Date.now() + '-' + file.originalname)
     }
 })
@@ -31,11 +31,11 @@ banner.post('/api/add/img', (request, response) => {
 
 banner.post('/api/select/upload', fileUpload, (request, response) => {
     const sql = `INSERT INTO BANNER SET ?`
-   const dataFile = fs.readFileSync(url + request.file.filename);
+    const dataFile = fs.readFileSync(url + request.file.filename);
 
     const object = {
         estatus: request.body.estado,
-        nombre_img: request.body.nombre_img,
+        nombre_img: request.file.filename,
         tipo: request.file.mimetype,
         base64_img: dataFile
     }
@@ -44,33 +44,33 @@ banner.post('/api/select/upload', fileUpload, (request, response) => {
 
 banner.get('/api/images', (request, response) => {
     const sql = `SELECT * FROM BANNER`;
-    utils.query(sql,response);
+    utils.query(sql, response);
 });
 
 banner.get('/api/images/all', (request, response) => {
     const sql = `SELECT * FROM BANNER`;
-    utils.queryImg(sql,response);
+    utils.queryImg(sql, response);
 });
 
 banner.get('/api/image/byId/:idBanner', (request, response) => {
-    const {idBanner} = request.params;
+    const { idBanner } = request.params;
     const sql = `SELECT * FROM BANNER where id_banner="${idBanner}"`;
-    utils.query(sql,response);
+    utils.query(sql, response);
 });
 
 banner.get('/api/image/estatus', (request, response) => {
     const sql = `SELECT * FROM BANNER where estatus="Activo"`;
-    utils.query(sql,response);
+    utils.query(sql, response);
 });
 
 banner.get('/api/image/visible/:idBanner', (request, response) => {
-    const {idBanner} = request.params;
+    const { idBanner } = request.params;
     const sql = `SELECT * FROM BANNER where id_banner="${idBanner}" AND estatus="Activo"`;
-    utils.query(sql,response);
+    utils.query(sql, response);
 });
 
 banner.put('/api/update/status/:idBanner', (request, response) => {
-    const {idBanner} =  request.params;
+    const { idBanner } = request.params;
     const sql = `UPDATE BANNER SET ? where id_banner = ${idBanner}`;
     const object = {
         estatus: request.body.estatus
@@ -79,7 +79,7 @@ banner.put('/api/update/status/:idBanner', (request, response) => {
 });
 
 banner.put('/api/update/img/:idBanner', (request, response) => {
-    const {idBanner} =  request.params;
+    const { idBanner } = request.params;
     const sql = `UPDATE BANNER SET ? where id_banner = ${idBanner}`;
     const object = {
         nombre_img: request.body.nombre_img,
@@ -89,10 +89,10 @@ banner.put('/api/update/img/:idBanner', (request, response) => {
 });
 
 banner.delete('/api/delete/img/:idBanner', (request, response) => {
-    const {idBanner} =  request.params;
+    const { idBanner } = request.params;
     console.log(idBanner);
     const sql = `DELETE FROM BANNER where id_banner = ${idBanner}`;
-    utils.query(sql,response);
+    utils.query(sql, response);
 });
 
 module.exports = banner;

@@ -246,7 +246,7 @@ export class FormularioGenerico extends LitElement {
             composed: true
         });
         this.resetElements();
-        // this.dispatchEvent(event);
+        this.dispatchEvent(event);
     }
 
     resetElements() {

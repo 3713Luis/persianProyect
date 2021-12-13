@@ -68,7 +68,6 @@ export class BannerDm extends LitElement {
     }
 
     handleResize(event) {
-        console.log(event.detail);
         let data = event.detail;
         if (data.img && data.select) {
             console.log("Mandando al Post");

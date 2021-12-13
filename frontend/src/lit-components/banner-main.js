@@ -70,7 +70,7 @@ export class BannerMain extends LitElement {
                     <span class="visually-hidden">Next</span>
                 </button>
                 </div> -->
-    <div class="carousel">
+    <!-- <div class="carousel">
     </div>
     <button @click="${this.changeImage}" class="carousel-control-prev" type="button"
         data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -84,8 +84,10 @@ export class BannerMain extends LitElement {
     ${this.objectData.view === true ? this.arrayData.map(element => {
     return html`
     <img style="width:40%; height: auto" class="img" src="${this.getUrlImage(element)}">`
-    }) : html `<p>No hay nada que mostrar por el momento</p>`}
-    `;}
+    }) : html `<p>No hay nada que mostrar por el momento</p>`} -->
+    <slider-generico .items="${this.arrayData}" .url="${this.commonUrl}"></slider-generico>
+    `;
+    }
 
     changeImage() {
         console.log("cambiando imagen");

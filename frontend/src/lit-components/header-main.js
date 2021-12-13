@@ -9,19 +9,33 @@ export class HeaderMain extends LitElement {
         .header-navigation {
               padding-top: 20px;
               display: block;
-              background: #a0a1e9;
+              background: #FF5722;
               height: 50px;
             }
         .nav-item {
-          display: inline;
-          margin-left: 20px;
+          display: inline-block;
         }
+        .nav-item a {
+            display: block;
+            text-decoration: none;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 0.5rem 1rem;
+            margin-left: 10px;
+        }
+
         .disabled {
+          background: #E64A19;
+          transition: background-color .5s;
           cursor: not-allowed;
           pointer-events: none;
+          border: solid 1px #FFFF;
         }
+
         .contenUl {
           margin: 0;
+          padding: 0;
+          list-style: none;
         }
         `;
     }

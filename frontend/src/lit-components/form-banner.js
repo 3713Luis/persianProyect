@@ -32,7 +32,8 @@ export class FormBanner extends LitElement {
                 ],
                 styleContent: [
                     "text-align: center;",
-                    "margin-bottom: 20px;"
+                    "margin-bottom: 20px;",
+                    "margin-top: 80px;"
                 ]
 
             },

@@ -8,7 +8,7 @@ export class ViewManager extends LitElement {
             position: relative;
             width:100%;
             min-height: 100vh;
-            background: #cfcced;
+            background: #FFFFFF;
         }
         .banner {
         }.
@@ -17,16 +17,19 @@ export class ViewManager extends LitElement {
         }
         .footer {
             bottom: 0;
-            background: #495da5;
+            background: #FFFFFF;
             width: 100%;
             height: 100px;
+            border: solid 0.2px #BDBDBD;
+            text-align: center;
+            font-size: 11px;
         }
         .contenBody {
-            background: orange;
+            background: #FFFFFF;
             padding: 10px;
             margin-bottom: 10px;
             min-height: 80vh;
-
+            padding-right: 10px;
         }
         `
     }
@@ -54,7 +57,7 @@ export class ViewManager extends LitElement {
         this.currentView = 'inicio';
         this.initShowViwes = {
             slider: 'slider',
-            catalogo: 'catalogo',
+            // catalogo: 'catalogo',
         }
     }
 
@@ -120,7 +123,10 @@ export class ViewManager extends LitElement {
          </div>   
            
             <div class="footer">
-                  
+            <p>Trabaja con nosotrosTérminos y condiciones Cómo cuidamos tu privacidad</p>
+            <p>Ayuda
+             Insurgentes Sur 1602 Piso 9 Suite 900, Crédito Constructor Benito Juarez, 03940 Ciudad de México, CDMX, Mexico
+            </p>
             </div>
         `;
     }

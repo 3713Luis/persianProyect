@@ -8,3 +8,4 @@ import './pruebas/visual-test'
 import './pruebas/controlador-test'
 import './dm/catalogo-dm'
 import './view-manager';
+import './common-component/slider-generico'

@@ -229,7 +229,6 @@ export class FormularioGenerico extends LitElement {
     }
 
     getElements() {
-        console.log('Recuperando Datos');
         let valueElementsInput = this.inputVales.map(element => {
             let idName = this.shadowRoot.querySelector('#'+ element.id).value;
             return {name: element.name, value: idName}
@@ -250,7 +249,6 @@ export class FormularioGenerico extends LitElement {
     }
 
     resetElements() {
-       console.log("Haciendo reset");
         this.reset = true;
     }
     

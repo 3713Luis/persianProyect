@@ -44,7 +44,6 @@ export class BannerDm extends LitElement {
          */
     constructor() {
         super();
-        console.log("Volvio a entrar");
         this.initShowViwes = {};
         this.showViewId = '';
         this.bannerSlider = false;
@@ -60,7 +59,6 @@ export class BannerDm extends LitElement {
         super.connectedCallback();
         window.addEventListener('set-data-banner', this.handleResize);
         window.addEventListener('reload-data', () => {
-            console.log('recargando');
             this.getData();
             this.reload = true;
         });

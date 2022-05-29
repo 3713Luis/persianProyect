@@ -19,7 +19,7 @@ export class SliderGenerico extends LitElement {
         }
         .slider {
             display: flex;
-            width: 300%;
+            width: 100%;
             height: 600px;
         }
 
@@ -107,10 +107,14 @@ export class SliderGenerico extends LitElement {
     }
 
     renderSlider() {
-        return html `
+            let countImage = 0;
+
+            return html `
         <div class="container-slider">
             <div class="slider" id="slider">
                 ${this.items.map(element => {
+                    countImage++;
+                   this.shadowRoot.querySelector('#slider').style.width = `${countImage * 100}%`;
                     return this.renderImage(element)
                 })}
 
@@ -127,7 +131,6 @@ export class SliderGenerico extends LitElement {
     }
 
     getUrlImage(element) {
-        console.log(this.url + element.urlName);
         return this.url + element.urlName;
     }
 

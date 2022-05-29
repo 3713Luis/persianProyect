@@ -25,7 +25,7 @@ export class ViewManager extends LitElement {
             font-size: 11px;
         }
         .contenBody {
-            background: #FFFFFF;
+            background: #5D6D7E;
             padding: 10px;
             margin-bottom: 10px;
             min-height: 80vh;
@@ -96,6 +96,7 @@ export class ViewManager extends LitElement {
     showMessage() {
         return confirm('Seguro que desea salir?... Se borrara tu progreso');
     }
+
     changeView() {
         this.currentView = this.showViewId;
         this.initShowViwes = {};

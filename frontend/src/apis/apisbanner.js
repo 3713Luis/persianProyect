@@ -4,7 +4,7 @@ const getImagesPromise = () => {
 
         axios({
             method: 'GET',
-            url: `${url}/images/all`
+            url: `${url}/images/by/status`
         }).then(res => {
             let flag = true;
             if (res.data === 'Not results') {
@@ -13,15 +13,9 @@ const getImagesPromise = () => {
             } else {
                 resolve(res);
             }
-            // let event = new CustomEvent('getData', {
-            //     detail: res,
-            //     bubbles: true,
-            //     composed: true
-            // });
-            // this.dispatchEvent(event);;
         }).catch(error => {
             reject(error);
-        }).finally(console.log("Aqui va el codigo que queramos siempre"))
+        }).finally()
     })
 }
 

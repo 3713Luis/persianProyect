@@ -53,6 +53,11 @@ banner.get('/api/images/all', (request, response) => {
     utils.queryImg(sql, response);
 });
 
+banner.get('/api/images/by/status', (request, response) => {
+    const sql = `SELECT * FROM BANNER where estatus="Activo"`;
+    utils.queryImg(sql, response);
+});
+
 banner.get('/api/image/byId/:idBanner', (request, response) => {
     const { idBanner } = request.params;
     const sql = `SELECT * FROM BANNER where id_banner="${idBanner}"`;
